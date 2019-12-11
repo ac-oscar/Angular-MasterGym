@@ -9,7 +9,7 @@ Primero ubicarse en una capeta luego ejecutar
 
 Luego acceder a la ruta nueva `cd mastergymangular`
 hacer `npm install`
-y por ultimo ejecutar el `ng serve --` 
+y por ultimo ejecutar el `ng serve --o` 
 
 ## 
 Saludos
