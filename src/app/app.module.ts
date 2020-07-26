@@ -10,7 +10,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ListadoClientesComponent } from './listado-clientes/listado-clientes.component';
@@ -24,12 +23,12 @@ import { InscripcionComponent } from './inscripcion/inscripcion.component';
 import { SeleccionarClienteComponent } from './seleccionar-cliente/seleccionar-cliente.component';
 import { ListadoInscripcionesComponent } from './listado-inscripciones/listado-inscripciones.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    EncabezadoComponent,
     ListadoClientesComponent,
     AgregarClienteComponent,
     PreciosComponent,
@@ -37,6 +36,7 @@ import { HeaderComponent } from './header/header.component';
     SeleccionarClienteComponent,
     ListadoInscripcionesComponent,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

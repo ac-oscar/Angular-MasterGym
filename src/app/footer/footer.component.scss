@@ -1,0 +1,17 @@
+$text-floral: #FFFAF0;
+
+@mixin zero-margin($pad-up-down, $pad-left-right) {
+    margin: 0px auto;
+    padding: $pad-up-down $pad-left-right;
+}
+
+.footer{
+    background-color: #03A49A;
+    color: $text-floral;
+    font-weight: bold ;
+    @include zero-margin(20px, 0px);
+}
+
+.footer a {    
+    color: $text-floral;
+}

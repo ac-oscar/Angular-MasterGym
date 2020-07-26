@@ -1,22 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar"
             aria-controls="Navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand" href="#"><img src="../../assets/logo.png" height="30" width="41"></a>
+        <a class="navbar-brand align-items-center" routerLink="/inscripcion">
+            <span>MasterGym</span>
+        </a>
 
         <div class="collapse navbar-collapse" id="Navbar">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" routerLink="/inscripcion">Incripción <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/inscripcion" routerLinkActive='active'>Incripción <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" routerLink="/listado-inscripciones">Ver Incripciones <span class="sr-only"></span></a>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/listado-inscripciones" routerLinkActive='active'>Ver Incripciones <span class="sr-only"></span></a>
                 </li>
 
-                <li class="nav-item dropdown" dropdown>
+                <li class="nav-item dropdown" dropdown  routerLinkActive='active'>
                     <a class="nav-link dropdown-toggle" dropdownToggle id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Clientes
@@ -29,8 +31,8 @@
                 </li>
 
 
-                <li class="nav-item ">
-                    <a class="nav-link" routerLink="/precios">Precios <span class="sr-only"></span></a>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/precios" routerLinkActive='active'>Precios <span class="sr-only"></span></a>
                 </li>
             </ul>
 
