@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar"
+            aria-controls="Navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" href="#"><img src="../../assets/logo.png" height="30" width="41"></a>
+
+        <div class="collapse navbar-collapse" id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/inscripcion">Incripción <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/listado-inscripciones">Ver Incripciones <span class="sr-only"></span></a>
+                </li>
+
+                <li class="nav-item dropdown" dropdown>
+                    <a class="nav-link dropdown-toggle" dropdownToggle id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Clientes
+                    </a>
+                    <div class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" routerLink="/agregar-cliente/">Agregar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" routerLink="/listado-clientes">Ver Clientes</a>
+                    </div>
+                </li>
+
+
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/precios">Precios <span class="sr-only"></span></a>
+                </li>
+            </ul>
+
+            <span class="navbar-text">
+                <a (click)="logout()">Logout <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-open-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                  </svg></a>
+            </span>
+        </div>
+    </div>
+</nav>

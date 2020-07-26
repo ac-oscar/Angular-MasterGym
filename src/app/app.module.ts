@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
@@ -23,6 +23,7 @@ import { PreciosComponent } from './precios/precios.component';
 import { InscripcionComponent } from './inscripcion/inscripcion.component';
 import { SeleccionarClienteComponent } from './seleccionar-cliente/seleccionar-cliente.component';
 import { ListadoInscripcionesComponent } from './listado-inscripciones/listado-inscripciones.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ListadoInscripcionesComponent } from './listado-inscripciones/listado-i
     InscripcionComponent,
     SeleccionarClienteComponent,
     ListadoInscripcionesComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
