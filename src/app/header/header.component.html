@@ -5,34 +5,34 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand align-items-center" routerLink="/inscripcion">
+        <a class="navbar-brand align-items-center" routerLink="/checkin">
             <span>MasterGym</span>
         </a>
 
         <div class="collapse navbar-collapse" id="Navbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/inscripcion" routerLinkActive='active'>Incripción <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" routerLink="/checkin" routerLinkActive='active'>Check In<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/listado-inscripciones" routerLinkActive='active'>Ver Incripciones <span class="sr-only"></span></a>
+                    <a class="nav-link" routerLink="/registrationlist" routerLinkActive='active'>Check In List<span class="sr-only"></span></a>
                 </li>
 
                 <li class="nav-item dropdown" dropdown  routerLinkActive='active'>
                     <a class="nav-link dropdown-toggle" dropdownToggle id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Clientes
+                        Customers
                     </a>
                     <div class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" routerLink="/agregar-cliente/">Agregar</a>
+                        <a class="dropdown-item" routerLink="/addcutomer/">Add</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" routerLink="/listado-clientes">Ver Clientes</a>
+                        <a class="dropdown-item" routerLink="/customerlist">See</a>
                     </div>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/precios" routerLinkActive='active'>Precios <span class="sr-only"></span></a>
+                    <a class="nav-link" routerLink="/prices" routerLinkActive='active'>Prices<span class="sr-only"></span></a>
                 </li>
             </ul>
 

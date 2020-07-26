@@ -19,24 +19,28 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { MensajesService } from './services/mensajes.service';
 import { PreciosComponent } from './precios/precios.component';
-import { InscripcionComponent } from './inscripcion/inscripcion.component';
 import { SeleccionarClienteComponent } from './seleccionar-cliente/seleccionar-cliente.component';
 import { ListadoInscripcionesComponent } from './listado-inscripciones/listado-inscripciones.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { CheckinComponent } from './checkin/checkin.component';
+import { CustomerslistComponent } from './customerslist/customerslist.component';
+import { RegistrationlistComponent } from './registrationlist/registrationlist.component';
+import { PricesComponent } from './prices/prices.component';
+import { AddcustomersComponent } from './addcustomers/addcustomers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ListadoClientesComponent,
-    AgregarClienteComponent,
-    PreciosComponent,
-    InscripcionComponent,
     SeleccionarClienteComponent,
-    ListadoInscripcionesComponent,
     HeaderComponent,
     FooterComponent,
+    CheckinComponent,
+    CustomerslistComponent,
+    RegistrationlistComponent,
+    PricesComponent,
+    AddcustomersComponent,
   ],
   imports: [
     BrowserModule,
