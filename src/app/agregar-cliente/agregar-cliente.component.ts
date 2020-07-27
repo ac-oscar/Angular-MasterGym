@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { MensajesService } from '../services/mensajes.service';
+import { MsgsService } from '../services/msgs.service';
 
 
 
@@ -23,7 +23,7 @@ export class AgregarClienteComponent implements OnInit {
     private storage: AngularFireStorage, 
     private db : AngularFirestore,
     private activeRoute: ActivatedRoute,
-    private msj: MensajesService) 
+    private msj: MsgsService) 
     { }
 
 
@@ -77,7 +77,7 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento )
     console.log(this.formularioCliente.value)
     this.db.collection('clientes').add(this.formularioCliente.value).then((termino)=>{
-      this.msj.mensajeCorrecto('Agregar', 'Se agrego correctamente');
+      this.msj.success('Agregar', 'Se agrego correctamente');
     })
   }
 
@@ -89,9 +89,9 @@ export class AgregarClienteComponent implements OnInit {
     
 
     this.db.doc('clientes/' + this.id).update(this.formularioCliente.value).then(()=>{
-      this.msj.mensajeCorrecto('Edito', 'Se edito correctamente');
+      this.msj.success('Edito', 'Se edito correctamente');
     }).catch(()=>{
-     this.msj.mensajeError('Error', 'Ocurrio algun error')
+     this.msj.error('Error', 'Ocurrio algun error')
     })
   }
 

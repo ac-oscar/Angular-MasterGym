@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MensajesService } from '../services/mensajes.service';
+import { MsgsService } from '../services/msgs.service';
 
 @Component({
   selector: 'app-login',
@@ -32,14 +32,14 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private spinner: NgxSpinnerService,
-    private msj: MensajesService
+    private msg: MsgsService
   ) { }
 
   ngOnInit() {
     this.createForm();
   }
 
-  createForm(): void {
+  private createForm(): void {
     this.loginForm = this.fb.group({
       email: ['',
         [
@@ -83,12 +83,12 @@ export class LoginComponent implements OnInit {
       this.spinner.show();
       this.afAuth.auth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
         .then(() => this.spinner.hide()).catch((error) => {
-          this.msj.mensajeAdvertencia('Login Error', error.message);
+          this.msg.warning('Login Error', error.message);
           this.spinner.hide();
         })
     }
     else {
-      this.msj.mensajeAdvertencia('Login Error', 'Please make sure information given is correct');
+      this.msg.warning('Login Error', 'Please make sure information given is correct');
     }
 
   }

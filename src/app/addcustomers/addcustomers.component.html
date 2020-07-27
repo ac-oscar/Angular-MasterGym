@@ -1,1 +1,82 @@
-<p>addcustomers works!</p>
+<div class="container mt-5">
+    <h4>Add Customers</h4>
+
+    <div class="mt-5">
+        <form [formGroup]="customerForm">
+            <div class="form-group row">
+                <div class="col-12 col-sm-6">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="Enter the name">
+                    <label *ngIf="formError.name" class="formAlert">
+                        <span> {{ formError.name }} </span>
+                    </label>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <label for="">Lastname</label>
+                    <input type="text" class="form-control" formControlName="lastname" placeholder="Enter the lastname">
+                    <label *ngIf="formError.lastname" class="formAlert">
+                        <span> {{ formError.lastname }} </span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="">Email</label>
+                    <input type="text" class="form-control" formControlName="email" placeholder="Enter the email">
+                    <label *ngIf="formError.email" class="formAlert">
+                        <span> {{ formError.email }} </span>
+                    </label>
+                </div>
+                <div class="col-sm-6">
+                    <label for="">Phone</label>
+                    <input type="tel" class="form-control" formControlName="phone" placeholder="Enter a phone number">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="">Identification</label>
+                    <input type="text" class="form-control" formControlName="identification"
+                        placeholder="Enter the identification">
+                </div>
+                <div class="col-sm-6">
+                    <label for="">Date of Birth</label>
+                    <input type="date" class="form-control" formControlName="dateOfBirth"
+                        placeholder="Enter the date of birth">
+                    <label *ngIf="formError.dateOfBirth" class="formAlert">
+                        <span> {{ formError.dateOfBirth }} </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-12 col-sm-12">
+                    <label for="">Image</label>
+                    <input type="file" (change)="uploadImage($event)" class="form-control-file" formControlName="imgUrl"
+                        placeholder="Add an image">
+                    <label *ngIf="formError.imgUrl" class="formAlert">
+                        <span> {{ formError.imgUrl }} </span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <progressbar [value]="uploadPercentage" type="danger" [striped]="true">{{ uploadPercentage }}%
+                    </progressbar>
+                </div>
+            </div>
+
+            <br>
+            <div class="form-group">
+                <div class="col-12 col-sm-4 offset-4">
+                    <button *ngIf="!isEditable" class="btn btn-info btn-block"
+                        [disabled]="customerForm.invalid && !urlImagen" (click)="addCutomer()">Add</button>
+                    <button *ngIf="isEditable" class="btn btn-info btn-block"
+                        [disabled]="customerForm.invalid && !urlImagen" (click)="updateCustomer()">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

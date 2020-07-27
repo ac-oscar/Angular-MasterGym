@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Cliente } from '../models/cliente';
+import { Customer } from '../models/customer';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { Cliente } from '../models/cliente';
   styleUrls: ['./seleccionar-cliente.component.scss']
 })
 export class SeleccionarClienteComponent implements OnInit {
-  clientes: Cliente[] = new Array<Cliente>();
+  clientes: Customer[] = new Array<Customer>();
   @Input('nombre')  nombre: string;
   @Output('seleccionoCliente') seleccionoCliente = new EventEmitter();
   @Output('canceloCliente') canceloCliente = new EventEmitter();
@@ -34,7 +34,7 @@ export class SeleccionarClienteComponent implements OnInit {
   buscarClientes(nombre: string)
   {
     this.clientes.forEach((cliente)=>{
-      if(cliente.nombre.toLowerCase().includes(nombre.toLowerCase()))
+      if(cliente.name.toLowerCase().includes(nombre.toLowerCase()))
       {
         cliente.visible = true;
       }
@@ -45,9 +45,9 @@ export class SeleccionarClienteComponent implements OnInit {
     })
   }
 
-  seleccionarCliente(cliente:Cliente)
+  seleccionarCliente(cliente:Customer)
   {
-    this.nombre = cliente.nombre + ' ' + cliente.apellido;
+    this.nombre = cliente.name + ' ' + cliente.lastname;
     this.clientes.forEach((cliente)=>{
       cliente.visible = false;
     })

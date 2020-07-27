@@ -1,1 +1,64 @@
-<p>prices works!</p>
+<div class="container mt-5">
+    <div class="row">
+
+        <div class="col-12 col-sm-12">
+            <h4>Prices</h4>
+        </div>        
+
+        <div class="col-sm-5 mt-5" id="pricesList">
+            <div class="alert alert-info" *ngFor="let price of prices" role="alert" (click)="setUpdatePrice(price)">
+                {{price.name}}
+              </div>
+        </div>
+        <div class="col-sm-6 offset-1 mt-5">
+            <form [formGroup]="priceForm">
+                <div class="form-group row">
+                    <label for="">Name</label>
+                    <input formControlName="name" class="form-control" type="text">
+                    <label *ngIf="formError.name" class="formAlert">
+                        <span> {{ formError.name }} </span>
+                    </label>
+                </div>
+
+                <div class="form-group row">
+                    <label for="">Cost</label>
+                    <input formControlName="cost" class="form-control" type="number">
+                    <label *ngIf="formError.cost" class="formAlert">
+                        <span> {{ formError.cost }} </span>
+                    </label>
+                </div>
+
+                <div class="form-group row">
+                    <label for="">Duration</label>
+                    <input formControlName="duration" class="form-control" type="number">
+                    <label *ngIf="formError.duration" class="formAlert">
+                        <span> {{ formError.duration }} </span>
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <label for="">Duration Type</label>
+                   
+                    <select formControlName="durationType"  class="form-control" name="" id="">
+                        <option value="1">Day</option>
+                        <option value="2">Week</option>
+                        <option value="3">Fortnight</option>
+                        <option value="4">Month</option>
+                        <option value="5">Year</option>
+                    </select>
+
+                    <label *ngIf="formError.durationType" class="formAlert">
+                        <span> {{ formError.durationType }} </span>
+                    </label>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12 col-sm-6 offset-3">
+                        <button *ngIf="!isToEdit" [disabled]="priceForm.invalid" class="btn btn-primary btn-block" (click)="addPrice()">Add</button>
+                        <button *ngIf="isToEdit" [disabled]="priceForm.invalid" class="btn btn-danger btn-block" (click)="updatePrice()">Update</button>
+                    </div>                    
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,27 @@
-<p>customerslist works!</p>
+<div class='container mt-5'>
+    <h4>Customers List</h4>
+
+    <form action="">
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Start typing to filter..." >
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-sm-4" *ngFor="let customer of customers">
+            <div class="card" >
+                <img class="card-img-top customerImg" [src]="customer.imgUrl">
+                <div class="card-body align-self-center">
+                    <!-- <p>{{customer.id}}</p> -->
+                    <h5 class="card-title">{{customer.name}} {{customer.lastname}}</h5>
+                    <a [routerLink]="['/addcutomer/', customer.id]" class="card-link">Update</a>
+                    <a href="#" class="card-link text-danger">Disable</a>
+                </div>
+            </div>
+            <br>
+        </div>  
+        
+    </div>
+</div>
+
+

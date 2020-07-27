@@ -3,8 +3,8 @@ import { Routes } from '@angular/router';
 import { RegistrationlistComponent } from '../registrationlist/registrationlist.component';
 import { CustomerslistComponent } from '../customerslist/customerslist.component';
 import { AddcustomersComponent } from '../addcustomers/addcustomers.component';
-import { PricesComponent } from '../prices/prices.component';
 import { CheckinComponent } from '../checkin/checkin.component';
+import { PricesComponent } from '../prices/prices.component';
 
 export const routes: Routes = [
     { path: 'checkin', component: CheckinComponent },

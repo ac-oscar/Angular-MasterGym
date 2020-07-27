@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Inscripcion } from '../models/inscripcion';
-import { Cliente } from '../models/cliente';
+import { Customer } from '../models/customer';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Precio } from '../models/precio';
-import { MensajesService } from '../services/mensajes.service';
+import { MsgsService } from '../services/msgs.service';
 
 @Component({
   selector: 'app-checkin',
@@ -13,14 +13,14 @@ import { MensajesService } from '../services/mensajes.service';
 export class CheckinComponent implements OnInit {
 
   inscripcion: Inscripcion = new Inscripcion();
-  clienteSeleccionado: Cliente = new Cliente();
+  clienteSeleccionado: Customer = new Customer();
   precioSeleccionado: Precio = new Precio();
   idPrecio: string = 'null';
   precios: Precio[] = new Array< Precio>();
 
   constructor(
     private db: AngularFirestore, 
-    private msj: MensajesService
+    private msg: MsgsService
     ) { }
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class CheckinComponent implements OnInit {
   }
 
   
-  asignarCliente(cliente: Cliente)
+  asignarCliente(cliente: Customer)
   {
     this.inscripcion.cliente = cliente.ref;
     this.clienteSeleccionado = cliente;
@@ -43,7 +43,7 @@ export class CheckinComponent implements OnInit {
 
   eliminarCliente()
   {
-    this.clienteSeleccionado = new Cliente();
+    this.clienteSeleccionado = new Customer();
     this.inscripcion.cliente = undefined;
   }
 
@@ -63,14 +63,14 @@ export class CheckinComponent implements OnInit {
       }
       this.db.collection('inscripciones').add(inscripcionAgregar).then((resultado)=>{
         this.inscripcion =  new Inscripcion();
-        this.clienteSeleccionado = new Cliente();
+        this.clienteSeleccionado = new Customer();
         this.precioSeleccionado = new Precio();
         this.idPrecio = 'null'
-        this.msj.mensajeCorrecto('Guardado', 'Se guardo correctamente')
+        this.msg.success('Guardado', 'Se guardo correctamente')
       })
     }
     else{
-      this.msj.mensajeAdvertencia('Advertencia',this.inscripcion.validar().mensaje )
+      this.msg.warning('Advertencia',this.inscripcion.validar().mensaje )
     }
    
   }

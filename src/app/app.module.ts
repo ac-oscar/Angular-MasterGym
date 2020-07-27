@@ -12,12 +12,12 @@ import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+
 import { ListadoClientesComponent } from './listado-clientes/listado-clientes.component';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { MensajesService } from './services/mensajes.service';
 import { PreciosComponent } from './precios/precios.component';
 import { SeleccionarClienteComponent } from './seleccionar-cliente/seleccionar-cliente.component';
 import { ListadoInscripcionesComponent } from './listado-inscripciones/listado-inscripciones.component';
@@ -28,6 +28,8 @@ import { CustomerslistComponent } from './customerslist/customerslist.component'
 import { RegistrationlistComponent } from './registrationlist/registrationlist.component';
 import { PricesComponent } from './prices/prices.component';
 import { AddcustomersComponent } from './addcustomers/addcustomers.component';
+
+import { MsgsService } from './services/msgs.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,7 @@ import { AddcustomersComponent } from './addcustomers/addcustomers.component';
   providers: [
     AngularFireAuth,
     AngularFirestore,
-    MensajesService
+    MsgsService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { MensajesService } from '../services/mensajes.service';
+import { MsgsService } from '../services/msgs.service';
 import { Precio } from '../models/precio';
 
 @Component({
@@ -17,7 +17,7 @@ export class PreciosComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private db: AngularFirestore,
-    private msj: MensajesService
+    private msg: MsgsService
     ) { }
 
   ngOnInit() {
@@ -50,11 +50,11 @@ export class PreciosComponent implements OnInit {
 
   agregar(){
     this.db.collection<Precio>('precios').add(this.formularioPrecio.value).then(()=>{
-      this.msj.mensajeCorrecto('Agregado', 'Se agrego correctamente');
+      this.msg.success('Agregado', 'Se agrego correctamente');
       this.formularioPrecio.reset();
       this.mostrarPrecios();
     }).catch(()=>{
-      this.msj.mensajeError('Error', 'Ocurrio un error');
+      this.msg.error('Error', 'Ocurrio un error');
     })
   }
 
@@ -75,12 +75,12 @@ export class PreciosComponent implements OnInit {
 
   editar(){
     this.db.doc('precios/' + this.id).update(this.formularioPrecio.value).then(()=>{
-      this.msj.mensajeCorrecto('Editado', 'Se edito correctamente')
+      this.msg.success('Editado', 'Se edito correctamente')
       this.formularioPrecio.reset();
       this.esEditar = false;
       this.mostrarPrecios();
     }).catch(()=>{
-      this.msj.mensajeError('Error', 'Ocurrio un error');
+      this.msg.error('Error', 'Ocurrio un error');
     })
   }
 }
