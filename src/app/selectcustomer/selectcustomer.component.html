@@ -1,0 +1,28 @@
+<div class="customers">
+    <div class="form-group" *ngIf="!name">
+        <label for="">Customer</label>
+        <input class="form-control" type="text" (input)="findCustomer($event.target.value)"
+            placeholder="Start typing to filter...">
+    </div>
+    <div class="form-group" *ngIf="name">
+        <label for="">Customer</label>
+        <div class="row">
+            <div class="col-sm-9">
+                <input [(ngModel)]="name" disabled type="text" class="form-control">
+            </div>
+            <div class="col-sm-3">
+                <button (click)="cancelCustomer()" class="btn btn-danger">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="list-group">
+        <div *ngFor="let customer of customers">
+            <a *ngIf="customer.visible" (click)="selectCustomer(customer)"
+                class="list-group-item list-group-item-action">
+                {{customer.name}} {{customer.lastname}}
+            </a>
+        </div>
+
+    </div>
+</div>

@@ -1,1 +1,23 @@
-<p>registrationlist works!</p>
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Customer</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of inscriptions">
+            <th scope="row">{{record.getCustomer.name}} {{record.getCustomer.lastname}}</th>
+            <td>{{record.date | date}}</td>
+            <td>{{record.endDate | date}}</td>
+            <td>
+              <img width="50px" [src]="record.getCustomer.imgUrl" alt="">
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+</div>

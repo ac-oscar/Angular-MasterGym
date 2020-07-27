@@ -13,14 +13,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
-import { ListadoClientesComponent } from './listado-clientes/listado-clientes.component';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { PreciosComponent } from './precios/precios.component';
-import { SeleccionarClienteComponent } from './seleccionar-cliente/seleccionar-cliente.component';
-import { ListadoInscripcionesComponent } from './listado-inscripciones/listado-inscripciones.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CheckinComponent } from './checkin/checkin.component';
@@ -30,12 +25,12 @@ import { PricesComponent } from './prices/prices.component';
 import { AddcustomersComponent } from './addcustomers/addcustomers.component';
 
 import { MsgsService } from './services/msgs.service';
+import { SelectcustomerComponent } from './selectcustomer/selectcustomer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SeleccionarClienteComponent,
     HeaderComponent,
     FooterComponent,
     CheckinComponent,
@@ -43,6 +38,7 @@ import { MsgsService } from './services/msgs.service';
     RegistrationlistComponent,
     PricesComponent,
     AddcustomersComponent,
+    SelectcustomerComponent,
   ],
   imports: [
     BrowserModule,

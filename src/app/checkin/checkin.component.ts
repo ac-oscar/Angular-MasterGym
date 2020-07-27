@@ -1,9 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Inscripcion } from '../models/inscripcion';
+import { CheckIn } from '../models/checkin';
 import { Customer } from '../models/customer';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Precio } from '../models/precio';
+import { Price } from '../models/price';
 import { MsgsService } from '../services/msgs.service';
+
+enum durationType {
+  Day = 1,
+  Week = 2,
+  Fortnight = 3,
+  Month = 4,
+  Year = 5
+};
 
 @Component({
   selector: 'app-checkin',
@@ -12,135 +20,130 @@ import { MsgsService } from '../services/msgs.service';
 })
 export class CheckinComponent implements OnInit {
 
-  inscripcion: Inscripcion = new Inscripcion();
-  clienteSeleccionado: Customer = new Customer();
-  precioSeleccionado: Precio = new Precio();
-  idPrecio: string = 'null';
-  precios: Precio[] = new Array< Precio>();
+  checkIn: CheckIn = new CheckIn();
+  customerSelected: Customer = new Customer();
+  selectedPrice: Price = new Price();
+  priceId: string = 'null';
+  prices: Price[] = new Array<Price>();
 
   constructor(
-    private db: AngularFirestore, 
+    private db: AngularFirestore,
     private msg: MsgsService
-    ) { }
+  ) { }
 
   ngOnInit() {
-    this.db.collection('precios').get().subscribe((resultado)=>{
-      resultado.docs.forEach((item)=>{
-        let precio = item.data() as Precio;
-        precio.id = item.id;
-        precio.ref = item.ref;
-        this.precios.push(precio)
+    this.db.collection('prices').get().subscribe((resultado) => {
+      resultado.docs.forEach((item) => {
+        let price = item.data() as Price;
+        price.id = item.id;
+        price.ref = item.ref;
+        this.prices.push(price)
       })
     })
   }
 
-  
-  asignarCliente(cliente: Customer)
-  {
-    this.inscripcion.cliente = cliente.ref;
-    this.clienteSeleccionado = cliente;
+  assignCustomer(customer: Customer) {
+    this.checkIn.customer = customer.ref;
+    this.customerSelected = customer;
   }
 
-  eliminarCliente()
-  {
-    this.clienteSeleccionado = new Customer();
-    this.inscripcion.cliente = undefined;
+  deleteCustomer() {
+    this.customerSelected = new Customer();
+    this.checkIn.customer = undefined;
   }
 
 
-  guardar()
-  {
-    if(this.inscripcion.validar().esValido)
-    {
-      let inscripcionAgregar = {
-        fecha: this.inscripcion.fecha,
-        fechaFinal: this.inscripcion.fechaFinal,
-        cliente: this.inscripcion.cliente,
-        precios: this.inscripcion.precios,
-        subTotal: this.inscripcion.subTotal,
-        isv: this.inscripcion.isv,
-        total: this.inscripcion.total
-      }
-      this.db.collection('inscripciones').add(inscripcionAgregar).then((resultado)=>{
-        this.inscripcion =  new Inscripcion();
-        this.clienteSeleccionado = new Customer();
-        this.precioSeleccionado = new Precio();
-        this.idPrecio = 'null'
-        this.msg.success('Guardado', 'Se guardo correctamente')
+  saveChanges() {
+    if (this.checkIn.validate().isValid) {
+      let registerToAdd = {
+        date: this.checkIn.date,
+        endDate: this.checkIn.endDate,
+        customer: this.checkIn.customer,
+        prices: this.checkIn.prices,
+        subTotal: this.checkIn.subTotal,
+        isv: this.checkIn.isv,
+        total: this.checkIn.total
+      };
+
+      this.db.collection('checkIn').add(registerToAdd).then((response) => {
+        this.checkIn = new CheckIn();
+        this.customerSelected = new Customer();
+        this.selectedPrice = new Price();
+        this.priceId = 'null'
+        this.msg.success('Correct!', 'Record successfully saved')
       })
     }
-    else{
-      this.msg.warning('Advertencia',this.inscripcion.validar().mensaje )
+    else {
+      this.msg.warning('Warning', this.checkIn.validate().msg)
     }
-   
+
   }
 
-  selecionarPrecio(id: string)
-  {
-    if(id != "null")
-    {
-      this.precioSeleccionado = this.precios.find(x=> x.id == id);
-      this.inscripcion.precios = this.precioSeleccionado.ref;
+  selectPrice(id: string) {
+    if (id != "null") {
+      this.selectedPrice = this.prices.find(x => x.id == id);
+      this.checkIn.prices = this.selectedPrice.ref;
 
-      this.inscripcion.subTotal = this.precioSeleccionado.costo;
-      this.inscripcion.isv = this.inscripcion.subTotal * 0.15;
-      this.inscripcion.total = this.inscripcion.subTotal  + this.inscripcion.isv;
+      this.checkIn.subTotal = this.selectedPrice.cost;
+      this.checkIn.isv = this.checkIn.subTotal * 0.15;
+      this.checkIn.total = this.checkIn.subTotal + this.checkIn.isv;
 
-      this.inscripcion.fecha = new Date();
+      this.checkIn.date = new Date();
 
-      if(this.precioSeleccionado.tipoDuracion == 1)
-      {
-        let dias: number = this.precioSeleccionado.duracion;
-        let fechaFinal = 
-        new Date(this.inscripcion.fecha.getFullYear(),this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias)
-        this.inscripcion.fechaFinal = fechaFinal;
-    
-      }
-      if(this.precioSeleccionado.tipoDuracion == 2)
-      {
-        let dias: number = this.precioSeleccionado.duracion * 7;
-        let fechaFinal = 
-        new Date(this.inscripcion.fecha.getFullYear(),this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias)
-        this.inscripcion.fechaFinal = fechaFinal;
-      }
-      if(this.precioSeleccionado.tipoDuracion == 3)
-      {
-        let dias: number = this.precioSeleccionado.duracion * 15;
-        let fechaFinal = 
-        new Date(this.inscripcion.fecha.getFullYear(),this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias)
-        this.inscripcion.fechaFinal = fechaFinal;
-      }
-      if(this.precioSeleccionado.tipoDuracion == 4)
-      {
-
-        let anio: number = this.inscripcion.fecha.getFullYear();
-        let meses = this.precioSeleccionado.duracion + this.inscripcion.fecha.getMonth();
-        let dia: number = this.inscripcion.fecha.getDate()
-        let fechaFinal = 
-        new Date(anio, meses ,dia )
-        this.inscripcion.fechaFinal = fechaFinal;
-      }
-      if(this.precioSeleccionado.tipoDuracion == 5)
-      {
-        let anio: number = this.inscripcion.fecha.getFullYear() + this.precioSeleccionado.duracion;
-        let meses = this.inscripcion.fecha.getMonth();
-        let dia: number = this.inscripcion.fecha.getDate()
-        let fechaFinal = 
-        new Date(anio, meses ,dia )
-        this.inscripcion.fechaFinal = fechaFinal;
+      switch (parseInt(this.selectedPrice.durationType.toString())) {
+        case durationType.Day: {
+          let days: number = this.selectedPrice.duration;
+          let endDate =
+            new Date(this.checkIn.date.getFullYear(), this.checkIn.date.getMonth(), this.checkIn.date.getDate() + days)
+          this.checkIn.endDate = endDate;
+          break;
+        }
+        case durationType.Week: {
+          let days: number = this.selectedPrice.duration;
+          let endDate =
+            new Date(this.checkIn.date.getFullYear(), this.checkIn.date.getMonth(), this.checkIn.date.getDate() + days)
+          this.checkIn.endDate = endDate;
+          break;
+        }
+        case durationType.Fortnight: {
+          let days: number = this.selectedPrice.duration;
+          let endDate =
+            new Date(this.checkIn.date.getFullYear(), this.checkIn.date.getMonth(), this.checkIn.date.getDate() + days)
+          this.checkIn.endDate = endDate;
+          break;
+        }
+        case durationType.Month: {
+          let year: number = this.checkIn.date.getFullYear();
+          let months = this.checkIn.date.getMonth();
+          let days: number = this.checkIn.date.getDate()
+          let endDate =
+            new Date(year, months, days + this.selectedPrice.duration)
+          this.checkIn.endDate = endDate;
+          break;
+        }
+        case durationType.Year: {
+          let year: number = this.checkIn.date.getFullYear();
+          let months = this.checkIn.date.getMonth();
+          let days: number = this.checkIn.date.getDate()
+          let endDate =
+            new Date(year, months, days + this.selectedPrice.duration)
+          this.checkIn.endDate = endDate;
+          break;
+        }
+        default: {
+          console.log("invalid");
+        }
       }
     }
-    else
-    {
-      this.precioSeleccionado = new Precio();
-      this.inscripcion.fecha = null;
-      this.inscripcion.fechaFinal = null;
-      this.inscripcion.precios = null;
-      this.inscripcion.subTotal = 0;
-      this.inscripcion.isv = 0;
-      this.inscripcion.total = 0;
+    else {
+      this.selectedPrice = new Price();
+      this.checkIn.date = null;
+      this.checkIn.endDate = null;
+      this.checkIn.prices = null;
+      this.checkIn.subTotal = 0;
+      this.checkIn.isv = 0;
+      this.checkIn.total = 0;
     }
   }
-
 
 }

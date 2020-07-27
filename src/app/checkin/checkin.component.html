@@ -1,52 +1,59 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-sm-6">
-            <app-seleccionar-cliente 
-            [nombre]="clienteSeleccionado.nombre" 
-            (seleccionoCliente)="asignarCliente($event)"
-            (canceloCliente)="eliminarCliente()" >
-            </app-seleccionar-cliente>
+            <app-selectcustomer [name]="customerSelected.name" (customerSelected)="assignCustomer($event)"
+                (customerCanceled)="deleteCustomer()">
+            </app-selectcustomer>
 
+            <div *ngIf="customerSelected.imgUrl" class="customerImg">
+                <img [src]="customerSelected.imgUrl" alt="">
+            </div>
+        </div>
+
+        <div class="col-sm-4 offset-2">
             <div class="from-control">
-                <label for="">Precio</label>
-                <select [(ngModel)]="idPrecio"  (change)="selecionarPrecio($event.target.value)" class="form-control"  name="" id="">
+                <label for="">Price</label>
+                <select [(ngModel)]="priceId" (change)="selectPrice($event.target.value)" class="form-control" name=""
+                    id="">
                     <option [value]="null">Seleccione un precio</option>
-                    <option *ngFor="let precio of precios" [value]="precio.id"> {{precio.nombre}}</option>
+                    <option *ngFor="let price of prices" [value]="price.id"> {{price.name}}</option>
                 </select>
             </div>
 
             <div class="from-control">
-                <label for="">Fecha Inicio</label>
-                <input class="form-control" [value]="inscripcion.fecha | date" type="text" disabled>
+                <br>
+                <label for="">Start Date</label>
+                <input class="form-control" [value]="checkIn.date | date" type="text" disabled>
             </div>
             <div class="from-control">
-                <label for="">Fecha Finaliza</label>
-                <input class="form-control" [value]="inscripcion.fechaFinal | date" type="text" disabled>
+                <br>
+                <label for="">End Date</label>
+                <input class="form-control" [value]="checkIn.endDate | date" type="text" disabled>
             </div>
 
             <div class="from-control">
+                <br>
                 <label for="">Sub Total</label>
-                <input class="form-control" [value]="inscripcion.subTotal" type="number" disabled>
+                <input class="form-control" [value]="checkIn.subTotal" type="number" disabled>
             </div>
 
             <div class="from-control">
+                <br>
                 <label for="">ISV</label>
-                <input class="form-control" [value]="inscripcion.isv" type="number" disabled>
+                <input class="form-control" [value]="checkIn.isv" type="number" disabled>
             </div>
 
             <div class="from-control">
+                <br>
                 <label for="">Total</label>
-                <input class="form-control" [value]="inscripcion.total" type="number" disabled>
+                <input class="form-control" [value]="checkIn.total" type="number" disabled>
             </div>
 
             <br>
-        
-            <button class="btn btn-primary" (click)="guardar()">Guardar</button>
+
+            <button class="btn btn-info btn-block" (click)="saveChanges()">Save Changes</button>
+
         </div>
-        <div class="col-sm-6">
-            <div *ngIf="clienteSeleccionado.imgUrl" class="customerImg">
-                <img [src]="clienteSeleccionado.imgUrl" alt="">
-            </div>
-        </div>
+
     </div>
 </div>
